@@ -1,41 +1,56 @@
 {% include head.html %}
 {% include header.html %}
 <div id="main-content" class="container" role="main">
-  {% if site.frontpage_goals_grid %}
-  <div class="frontpage-goals-grid">
-    <div aria-live="polite">
-      <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
 
-      <!-- Allgemeiner Text (Standard) -->
-      <div id="intro-default" class="frontpage-goals-grid-description intro-text">
-          {{ site.frontpage_introduction_banner.description | t | markdownify }}
+  {% if site.frontpage_introduction_banner %}
+    <div>
+        <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
+        <div class="frontpage-goals-grid-description">{{ site.frontpage_introduction_banner.description | t | markdownify }}</div>
+    </div>
+  {% endif %}
+
+  {% if site.frontpage_goals_grid %}
+    <div class="frontpage-goals-grid">
+      <div aria-live="polite">
+        <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
+
+        <!-- Allgemeiner Text (Standard) -->
+        <div id="intro-default" class="frontpage-goals-grid-description intro-text">
+            {{ site.frontpage_introduction_banner.description | t | markdownify }}
+        </div>
+
+        <!-- Texte zu den vier Blasen (anfangs versteckt) -->
+        {% for n in (1..4) %}
+            {% assign key = 'goal_' | append: n %}
+            {% assign title_key = n | append: '-title' %}
+            {% assign desc = site.frontpage_introduction_banner.goal_descriptions[key] %}
+            {% assign title = site.frontpage_introduction_banner.goal_descriptions[title_key] %}
+            {% if desc %}
+              <!-- <h3  id="intro-title-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>{{ title | t }}</h3>-->
+              <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
+                {% if title %}
+                  <h3>{{ title | t }}</h3>
+                {% endif %}
+                  {{ desc | t | markdownify }}
+              </div>
+            {% endif %}
+        {% endfor %}
       </div>
 
-      <!-- Texte zu den vier Blasen (anfangs versteckt) -->
-      {% for n in (1..4) %}
-          {% assign key = 'goal_' | append: n %}
-          {% assign title_key = n | append: '-title' %}
-          {% assign desc = site.frontpage_introduction_banner.goal_descriptions[key] %}
-          {% assign title = site.frontpage_introduction_banner.goal_descriptions[title_key] %}
-          {% if desc %}
-            <!-- <h3  id="intro-title-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>{{ title | t }}</h3>-->
-            <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
-              {% if title %}
-                <h3>{{ title | t }}</h3>
-              {% endif %}
-                {{ desc | t | markdownify }}
-            </div>
-          {% endif %}
-      {% endfor %}
+      {% if site.frontpage_goals_grid.description %}
+        <div class="frontpage-goals-grid-description">{{ site.frontpage_goals_grid.description | t | markdownify }}</div>
+      {% endif %}
+
+      {% include components/goal-tiles.html %}
     </div>
-
-    {% if site.frontpage_goals_grid.description %}
-      <div class="frontpage-goals-grid-description">{{ site.frontpage_goals_grid.description | t | markdownify }}</div>
-    {% endif %}
-
-    {% include components/goal-tiles.html %}
-  </div>
   {% endif %}
+
+
+
+
+
+
+
 
   {% if site.frontpage_cards %}
   <div class="frontpage-cards">
