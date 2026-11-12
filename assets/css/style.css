@@ -2831,6 +2831,9 @@ body.contrast-high .column-header:focus-visible {
   transform: rotate(-135deg);
   margin-top: 4px; }
 
+.intro-text[hidden] {
+  display: none !important; }
+
 /* Aufklapp-Panel: zu = Höhe 0, offen = natürliche Höhe (animiert) */
 .item-panel {
   display: grid;
