@@ -26,7 +26,7 @@
                     class="column-header header-{{ color }}"
                     aria-expanded="false"
                     aria-controls="panel-{{ goal.number }}">
-              <span>{{ goal.name }}x</span>
+              <span>{{ goal.name }}</span>
             </button>
           </h2>
 
@@ -118,22 +118,33 @@
     </div>
   </div>
   <script>
-  const headers = document.querySelectorAll('.column-header[aria-controls]');
+    const headers = document.querySelectorAll('.column-header[aria-controls]');
 
-  function setOpen(btn, open) {
-    btn.setAttribute('aria-expanded', String(open));
-    document.getElementById(btn.getAttribute('aria-controls'))
-            .classList.toggle('open', open);
-  }
+    function setOpen(btn, open) {
+      btn.setAttribute('aria-expanded', String(open));
+      document.getElementById(btn.getAttribute('aria-controls'))
+              .classList.toggle('open', open);
+    }
 
-  headers.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+    // n = Nummer der Blase oder null für den allgemeinen Text
+    function showIntro(n) {
+      document.querySelectorAll('.intro-text').forEach(el => el.hidden = true);
+      const target = document.getElementById(n ? 'intro-goal-' + n : 'intro-default')
+                  || document.getElementById('intro-default');   // Fallback, falls kein Text hinterlegt
+      if (target) target.hidden = false;
+    }
 
-      headers.forEach(other => setOpen(other, false));  // erst alle schließen
-      setOpen(btn, willOpen);                           // dann die angeklickte umschalten
+    headers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const willOpen = btn.getAttribute('aria-expanded') !== 'true';
 
-      if (e.detail > 0) btn.blur();                     // siehe Punkt 2 (nur bei Mausklick)
+        headers.forEach(other => setOpen(other, false));
+        setOpen(btn, willOpen);
+
+        const n = btn.getAttribute('aria-controls').replace('panel-', '');
+        showIntro(willOpen ? n : null);   // beim Zuklappen wieder der allgemeine Text
+
+        if (e.detail > 0) btn.blur();
+      });
     });
-  });
-</script>
+  </script>

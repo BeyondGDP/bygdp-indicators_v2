@@ -93,6 +93,8 @@ body.contrast-high .column-header:focus-visible { outline-color: #ffff00; }
   margin-top: 4px;
 }
 
+.intro-text[hidden] { display: none !important; }
+
 /* Aufklapp-Panel: zu = Höhe 0, offen = natürliche Höhe (animiert) */
 .item-panel {
   display: grid;

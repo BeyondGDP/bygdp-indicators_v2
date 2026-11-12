@@ -2,11 +2,26 @@
 {% include header.html %}
 <div id="main-content" class="container" role="main">
 
-    {% if site.frontpage_introduction_banner %}
-    <div>
-        <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
-        <div class="frontpage-goals-grid-description">{{ site.frontpage_introduction_banner.description | t | markdownify }}</div>
-    </div>
+      {% if site.frontpage_introduction_banner %}
+        <div aria-live="polite">
+          <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
+
+          <!-- Allgemeiner Text (Standard) -->
+          <div id="intro-default" class="frontpage-goals-grid-description intro-text">
+              {{ site.frontpage_introduction_banner.description | t | markdownify }}
+          </div>
+
+          <!-- Texte zu den vier Blasen (anfangs versteckt) -->
+          {% for n in (1..4) %}
+              {% assign key = 'description_' | append: n %}
+              {% assign desc = site.frontpage_introduction_banner.[key] %}
+              {% if desc %}
+              <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
+                  {{ desc | t | markdownify }}
+              </div>
+              {% endif %}
+          {% endfor %}
+        </div>
     {% endif %}
 
     {% if site.frontpage_goals_grid %}
