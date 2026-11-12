@@ -15,8 +15,8 @@
 
       <!-- Texte zu den vier Blasen (anfangs versteckt) -->
       {% for n in (1..4) %}
-          {% assign key = 'description_' | append: n %}
-          {% assign desc = site.frontpage_introduction_banner.[key] %}
+          {% assign key = 'goal_' | append: n %}
+          {% assign desc = site.frontpage_introduction_banner.description.[key] %}
           {% if desc %}
           <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
               {{ desc | t | markdownify }}
