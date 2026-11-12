@@ -61,6 +61,10 @@ frontpage_introduction_banner:
       goal_2: frontpage.description_2
       goal_3: frontpage.description_3
       goal_4: frontpage.description_4
+      1-title: global_goals.1-title
+      2-title: global_goals.2-title
+      3-title: global_goals.3-title
+      4-title: global_goals.4-title
 
 frontpage_cards:
     # - rule_color: grey

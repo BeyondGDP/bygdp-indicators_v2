@@ -9,15 +9,16 @@
       <!-- Allgemeiner Text (Standard) -->
       <div id="intro-default" class="frontpage-goals-grid-description intro-text">
           {{ site.frontpage_introduction_banner.description | t | markdownify }}
-          {{ site.frontpage_introduction_banner.goal_descriptions.description_1 }}
-          {{ site.frontpage_introduction_banner.goal_descriptions.description_2 | t | markdownify }}
       </div>
 
       <!-- Texte zu den vier Blasen (anfangs versteckt) -->
       {% for n in (1..4) %}
           {% assign key = 'goal_' | append: n %}
+          {% assign title_key = n | append: '-title' %}
           {% assign desc = site.frontpage_introduction_banner.goal_descriptions[key] %}
+          {% assign title = site.frontpage_introduction_banner.goal_descriptions[title_key] %}
           {% if desc %}
+          <h3>{{ title | t }}</h3>
           <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
               {{ desc | t | markdownify }}
           </div>
