@@ -18,8 +18,11 @@
           {% assign desc = site.frontpage_introduction_banner.goal_descriptions[key] %}
           {% assign title = site.frontpage_introduction_banner.goal_descriptions[title_key] %}
           {% if desc %}
-            <h3  id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>{{ title | t }}</h3>
+            <!-- <h3  id="intro-title-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>{{ title | t }}</h3>-->
             <div id="intro-goal-{{ n }}" class="frontpage-goals-grid-description intro-text" hidden>
+              {% if title %}
+                <h3>{{ title | t }}</h3>
+              {% endif %}
                 {{ desc | t | markdownify }}
             </div>
           {% endif %}
