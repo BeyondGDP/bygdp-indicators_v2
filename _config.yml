@@ -9,7 +9,7 @@
 title: general.tabTitle #German Indicators For The Sustainable Development Goals
 description: Data Platform Prototype
 baseurl: "/bygdp-indicators_v2" # the subpath of your site, e.g. /blog
-url: ""
+url: "/bygdp-indicators_v2"
 data_dir: data
 environment: staging
 remote_data_prefix: "https://beyondgdp.github.io/bygdp-data"
