@@ -118,12 +118,22 @@
     </div>
   </div>
   <script>
-    document.querySelectorAll('.column-header[aria-controls]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const panel = document.getElementById(btn.getAttribute('aria-controls'));
-        const open = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!open));
-        panel.classList.toggle('open', !open);
-      });
+  const headers = document.querySelectorAll('.column-header[aria-controls]');
+
+  function setOpen(btn, open) {
+    btn.setAttribute('aria-expanded', String(open));
+    document.getElementById(btn.getAttribute('aria-controls'))
+            .classList.toggle('open', open);
+  }
+
+  headers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+
+      headers.forEach(other => setOpen(other, false));  // erst alle schließen
+      setOpen(btn, willOpen);                           // dann die angeklickte umschalten
+
+      if (e.detail > 0) btn.blur();                     // siehe Punkt 2 (nur bei Mausklick)
     });
-  </script>
+  });
+</script>
