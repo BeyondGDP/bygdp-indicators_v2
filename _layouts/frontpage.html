@@ -2,15 +2,8 @@
 {% include header.html %}
 <div id="main-content" class="container" role="main">
 
-  {% if site.frontpage_introduction_banner %}
-    <div>
-        <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
-        <div class="frontpage-goals-grid-description">{{ site.frontpage_introduction_banner.description | t | markdownify }}</div>
-    </div>
-  {% endif %}
-
   {% if site.frontpage_goals_grid %}
-    <div class="frontpage-goals-grid">
+    <div class="frontpage-goals-grid" style="border-top: 0px; border-bottom: 2px; solid #ccc>
       <div aria-live="polite">
         <h1>{{ site.frontpage_goals_grid.title | t }}</h1>
 
