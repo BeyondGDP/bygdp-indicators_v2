@@ -2753,8 +2753,8 @@ body {
   color: var(--text); }
 
 .board {
-  max-width: 1200px;
-  margin: 0 auto; }
+  max-width: 1400px;
+  margin: 0; }
 
 .columns {
   display: grid;
